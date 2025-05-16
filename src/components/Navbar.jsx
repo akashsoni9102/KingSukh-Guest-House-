@@ -8,7 +8,7 @@ const Navbar = () => {
     <nav className="bg-white text-yellow-500 p-4 shadow-md">
       <div className="container mx-auto flex justify-between items-center">
         {/* Logo */}
-        <Link to="/home">
+        <Link to="/">
           <h1 className="text-3xl font-bold hover:text-yellow-600 cursor-pointer transition duration-300">
             KingSukh
           </h1>
@@ -16,15 +16,17 @@ const Navbar = () => {
 
         {/* Desktop Links */}
         <div className="hidden md:flex space-x-8">
-          {["Home", "About", "Rooms", "Services", "Gallery", "Contact"].map((item) => (
-            <Link
-              to={`/${item.toLowerCase()}`}
-              key={item}
-              className="text-yellow-500 hover:text-yellow-600 text-xl transition duration-300"
-            >
-              {item}
-            </Link>
-          ))}
+          {["Home", "About", "Rooms", "Services", "Gallery", "Contact"].map(
+            (item) => (
+              <Link
+                to={item === "Home" ? "/" : `/${item.toLowerCase()}`}
+                key={item}
+                className="text-yellow-500 hover:text-yellow-600 text-xl transition duration-300"
+              >
+                {item}
+              </Link>
+            )
+          )}
         </div>
 
         {/* Mobile Hamburger Menu */}
@@ -55,16 +57,18 @@ const Navbar = () => {
       {isMenuOpen && (
         <div className="md:hidden bg-white text-yellow-500 py-4">
           <div className="space-y-4 text-center">
-            {["Home", "About", "Rooms", "Services", "Gallery", "Contact"].map((item) => (
-              <Link
-                to={`/${item.toLowerCase()}`}
-                key={item}
-                className="block text-yellow-500 hover:text-yellow-600 text-xl transition duration-300"
-                onClick={() => setIsMenuOpen(false)} // Close the menu when an item is clicked
-              >
-                {item}
-              </Link>
-            ))}
+            {["Home", "About", "Rooms", "Services", "Gallery", "Contact"].map(
+              (item) => (
+                <Link
+                  to={`/${item.toLowerCase()}`}
+                  key={item}
+                  className="block text-yellow-500 hover:text-yellow-600 text-xl transition duration-300"
+                  onClick={() => setIsMenuOpen(false)} // Close the menu when an item is clicked
+                >
+                  {item}
+                </Link>
+              )
+            )}
           </div>
         </div>
       )}
