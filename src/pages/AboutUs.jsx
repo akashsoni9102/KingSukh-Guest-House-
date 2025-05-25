@@ -4,13 +4,14 @@ import Reception from "../assets/reception-img.avif";
 const AboutUs = () => (
   <div id="about" className="bg-gray-100 px-4 sm:px-6 lg:px-8 py-12">
     {/* Heading */}
-    <h2 className="text-3xl sm:text-4xl font-extrabold mb-10 text-center text-gray-800">
+    <h2 className="text-3xl sm:text-4xl font-bold mb-10 text-center text-gray-800">
       About Us
     </h2>
 
     <section>
-      <div className="flex flex-col md:flex-row items-center gap-10 lg:gap-16">
-        {/* Image Section - Now on the left */}
+      <div className="flex flex-col md:flex-row items-center md:items-start gap-10 lg:gap-16">
+        
+        {/* Image Section - Left */}
         <div className="w-full md:w-1/2 flex justify-center">
           <img
             src={Reception}
@@ -19,15 +20,27 @@ const AboutUs = () => (
           />
         </div>
 
-        {/* Text Section - Now on the right */}
+        {/* Text Section - Right */}
         <div className="w-full md:w-1/2">
-          <p className="text-xl sm:text-2xl font-bold mb-4" style={{ color: "#e69595" }}>
+          <p className="text-xl sm:text-2xl font-bold mb-4 text-pink-400">
             The Best Holidays Start Here!
           </p>
 
           <p className="mb-6 text-gray-700 leading-relaxed text-base sm:text-lg">
-            Embark on a tranquil journey at our <span className="font-medium text-gray-900">Kingsukh Guest House</span>, enveloped by the scenic allure of <strong>Biharinath Hill</strong>, <strong>Baranti Hill</strong>, <strong>Susunia Hill</strong>, <strong>Joychandi Hill</strong>, <strong>Garhpanchkot</strong>, <strong>Baranti Dam</strong>, <strong>Maithon Dam</strong>, and the captivating <strong>Panchat Dam</strong>. <br /><br />
-            Revel in the embrace of comfort, relish delightful meals, and unwind in our verdant garden oasis. Your ideal retreat beckons—promising a harmonious blend of nature's beauty and heartfelt hospitality. Explore the hidden gems of <strong>Purulia</strong>, creating memories that linger long after your stay.
+            Embark on a tranquil journey at our{" "}
+            <span className="font-medium text-gray-900">
+              Kingsukh Guest House
+            </span>, enveloped by the scenic allure of{" "}
+            <strong>Biharinath Hill</strong>, <strong>Baranti Hill</strong>,{" "}
+            <strong>Susunia Hill</strong>, <strong>Joychandi Hill</strong>,{" "}
+            <strong>Garhpanchkot</strong>, <strong>Baranti Dam</strong>,{" "}
+            <strong>Maithon Dam</strong>, and the captivating{" "}
+            <strong>Panchat Dam</strong>. <br /><br />
+            Revel in the embrace of comfort, relish delightful meals, and unwind
+            in our verdant garden oasis. Your ideal retreat beckons—promising a
+            harmonious blend of nature's beauty and heartfelt hospitality.
+            Explore the hidden gems of <strong>Purulia</strong>, creating
+            memories that linger long after your stay.
           </p>
 
           <a

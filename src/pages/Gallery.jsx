@@ -28,7 +28,6 @@ const galleryImages = [
 ];
 
 const Gallery = () => {
-  // State to handle the modal visibility and selected image
   const [isModalOpen, setIsModalOpen] = useState(false);
   const [selectedImageIndex, setSelectedImageIndex] = useState(null);
 
@@ -55,23 +54,23 @@ const Gallery = () => {
   };
 
   return (
-    <section id="gallery" className="py-16 px-8 bg-white">
-      <h2 className="text-4xl font-extrabold mb-10 text-center text-gray-800">
+    <section id="gallery" className="py-16 px-4 sm:px-8 bg-white">
+      <h2 className="text-3xl sm:text-4xl font-bold mb-10 text-center text-gray-800">
         Gallery
       </h2>
 
-      {/* Gallery Images */}
-      <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-8">
+      {/* Responsive Grid */}
+      <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6 sm:gap-8">
         {galleryImages.map((image, index) => (
           <div
             key={image.id}
-            className="overflow-hidden rounded-xl shadow-lg group transform transition duration-300 hover:scale-105"
-            onClick={() => openModal(index)} // Open modal when image is clicked
+            className="overflow-hidden rounded-xl shadow-md group cursor-pointer transform transition duration-300 hover:scale-105"
+            onClick={() => openModal(index)}
           >
             <img
               src={image.src}
               alt={image.alt}
-              className="w-full h-64 object-cover transition-transform duration-300 group-hover:scale-110 cursor-pointer"
+              className="w-full h-60 sm:h-64 md:h-72 object-cover transition-transform duration-300 group-hover:scale-110"
             />
           </div>
         ))}
@@ -80,27 +79,30 @@ const Gallery = () => {
       {/* Modal */}
       {isModalOpen && (
         <div
-          className="fixed inset-0 bg-gray-800 bg-opacity-75 flex justify-center items-center z-50"
-          onClick={closeModal} // Close modal when clicked outside image
+          className="fixed inset-0 bg-black bg-opacity-70 flex justify-center items-center z-50 p-4"
+          onClick={closeModal}
         >
           <div
-            className="relative"
-            onClick={(e) => e.stopPropagation()} // Prevent closing when image is clicked
+            className="relative max-w-full max-h-full"
+            onClick={(e) => e.stopPropagation()}
           >
             <img
               src={galleryImages[selectedImageIndex].src}
               alt={galleryImages[selectedImageIndex].alt}
-              className="max-w-4xl max-h-[90vh] object-contain rounded-xl"
+              className="w-auto max-w-[90vw] h-auto max-h-[85vh] rounded-xl object-contain"
             />
-            {/* Navigation Buttons */}
+
+            {/* Previous Button */}
             <button
-              className="absolute top-1/2 left-2 transform -translate-y-1/2 text-white text-3xl bg-black bg-opacity-50 rounded-full p-2"
+              className="absolute top-1/2 left-4 transform -translate-y-1/2 text-white text-3xl bg-black bg-opacity-50 rounded-full p-2 hover:bg-opacity-70"
               onClick={prevImage}
             >
               &#8592;
             </button>
+
+            {/* Next Button */}
             <button
-              className="absolute top-1/2 right-2 transform -translate-y-1/2 text-white text-3xl bg-black bg-opacity-50 rounded-full p-2"
+              className="absolute top-1/2 right-4 transform -translate-y-1/2 text-white text-3xl bg-black bg-opacity-50 rounded-full p-2 hover:bg-opacity-70"
               onClick={nextImage}
             >
               &#8594;

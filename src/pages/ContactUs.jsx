@@ -1,67 +1,60 @@
 import React from "react";
+import { motion } from "framer-motion";
 
 const ContactUs = () => (
-  <section id="contact" className="p-8 bg-gray-100">
-    <h2 className="text-4xl font-extrabold mb-10 text-center text-gray-800">Contact Us</h2>
-    
-    <form className="space-y-6 max-w-lg mx-auto bg-white p-6 rounded-lg shadow-xl">
-      {/* Name Field */}
-      <div className="flex flex-col">
-        <label htmlFor="name" className="text-lg font-semibold text-gray-700 mb-2">Name</label>
-        <input
-          id="name"
-          type="text"
-          placeholder="Your Full Name"
-          className="w-full p-3 border border-gray-300 rounded-lg shadow-sm focus:outline-none focus:ring-2 focus:ring-yellow-500 focus:border-transparent transition duration-300"
-          required
-        />
-      </div>
-      
-      {/* Mobile No. Field */}
-      <div className="flex flex-col">
-        <label htmlFor="mobile" className="text-lg font-semibold text-gray-700 mb-2">Mobile No.</label>
-        <input
-          id="mobile"
-          type="tel"
-          placeholder="Your Mobile Number"
-          className="w-full p-3 border border-gray-300 rounded-lg shadow-sm focus:outline-none focus:ring-2 focus:ring-yellow-500 focus:border-transparent transition duration-300"
-          required
-        />
-      </div>
-      
-      {/* Email Field */}
-      <div className="flex flex-col">
-        <label htmlFor="email" className="text-lg font-semibold text-gray-700 mb-2">Email</label>
-        <input
-          id="email"
-          type="email"
-          placeholder="Your Email Address"
-          className="w-full p-3 border border-gray-300 rounded-lg shadow-sm focus:outline-none focus:ring-2 focus:ring-yellow-500 focus:border-transparent transition duration-300"
-        />
-      </div>
-      
-      {/* Message Field */}
-      <div className="flex flex-col">
-        <label htmlFor="message" className="text-lg font-semibold text-gray-700 mb-2">Message</label>
-        <textarea
-          id="message"
-          placeholder="Your Message"
-          className="w-full p-3 border border-gray-300 rounded-lg shadow-sm focus:outline-none focus:ring-2 focus:ring-yellow-500 focus:border-transparent transition duration-300"
-          rows="4"
-          required
-        />
-      </div>
-      
-      {/* Submit Button */}
-      <div className="text-center">
-        <button
-          type="submit"
-          className="w-full py-3 px-6 bg-yellow-500 text-white font-semibold rounded-lg shadow-md hover:bg-yellow-400 transition duration-300 focus:outline-none focus:ring-2 focus:ring-yellow-600"
-        >
-          Send Message
-        </button>
-      </div>
-    </form>
+  <section id="contact" className="py-16 px-6 bg-gradient-to-br from-white to-gray-100">
+    <motion.h2
+      className="text-4xl font-bold text-center text-gray-800 mb-12"
+      initial={{ opacity: 0, y: -20 }}
+      whileInView={{ opacity: 1, y: 0 }}
+      transition={{ duration: 0.6 }}
+    >
+      Contact Us
+    </motion.h2>
+
+    <motion.form
+      className="max-w-2xl mx-auto bg-white p-8 rounded-2xl shadow-2xl space-y-6"
+      initial={{ opacity: 0, y: 30 }}
+      whileInView={{ opacity: 1, y: 0 }}
+      transition={{ duration: 0.7 }}
+    >
+      {["Name", "Mobile No.", "Email", "Message"].map((label, i) => {
+        const id = label.toLowerCase().replace(/\s/g, "");
+        const isTextarea = label === "Message";
+
+        return (
+          <div key={id} className="flex flex-col">
+            <label htmlFor={id} className="mb-2 font-semibold text-gray-700">
+              {label}
+            </label>
+            {isTextarea ? (
+              <textarea
+                id={id}
+                rows="4"
+                placeholder={`Your ${label}`}
+                className="p-3 rounded-xl border border-gray-300 shadow-sm focus:outline-none focus:ring-2 focus:ring-yellow-500 transition"
+                required
+              />
+            ) : (
+              <input
+                id={id}
+                type={label === "Email" ? "email" : label === "Mobile No." ? "tel" : "text"}
+                placeholder={`Your ${label}`}
+                className="p-3 rounded-xl border border-gray-300 shadow-sm focus:outline-none focus:ring-2 focus:ring-yellow-500 transition"
+                required={label !== "Email"}
+              />
+            )}
+          </div>
+        );
+      })}
+
+      <button
+        type="submit"
+        className="w-full bg-yellow-500 hover:bg-yellow-400 text-white font-semibold py-3 rounded-xl shadow-md transition"
+      >
+        Send Message
+      </button>
+    </motion.form>
   </section>
 );
 
