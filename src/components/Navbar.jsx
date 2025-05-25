@@ -4,72 +4,87 @@ import { Link } from "react-router-dom";
 const Navbar = () => {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
 
+  const navItems = [
+    { name: "Home", to: "/" },
+    { name: "About", to: "/about" },
+    { name: "Rooms", to: "/rooms" },
+    { name: "Services", to: "/services" },
+    { name: "Gallery", to: "/gallery" },
+    { name: "Contact", to: "/contact" },
+  ];
+
   return (
-    <nav className="bg-white text-yellow-500 p-4 shadow-md">
-      <div className="container mx-auto flex justify-between items-center">
+    <nav className="bg-white shadow-md sticky top-0 z-50">
+      <div className="container mx-auto px-4 flex justify-between items-center h-16">
         {/* Logo */}
-        <Link to="/">
-          <h1 className="text-3xl font-bold hover:text-yellow-600 cursor-pointer transition duration-300">
-            KingSukh
-          </h1>
+        <Link to="/" className="text-yellow-500 text-3xl font-bold hover:text-yellow-600 transition duration-300">
+          KingSukh
         </Link>
 
-        {/* Desktop Links */}
-        <div className="hidden md:flex space-x-8">
-          {["Home", "About", "Rooms", "Services", "Gallery", "Contact"].map(
-            (item) => (
+        {/* Desktop Menu */}
+        <ul className="hidden md:flex space-x-8">
+          {navItems.map(({ name, to }) => (
+            <li key={name}>
               <Link
-                to={item === "Home" ? "/" : `/${item.toLowerCase()}`}
-                key={item}
-                className="text-yellow-500 hover:text-yellow-600 text-xl transition duration-300"
+                to={to}
+                className="text-yellow-500 hover:text-yellow-600 text-lg font-semibold transition duration-300"
               >
-                {item}
+                {name}
               </Link>
-            )
-          )}
-        </div>
+            </li>
+          ))}
+        </ul>
 
-        {/* Mobile Hamburger Menu */}
-        <div className="md:hidden">
-          <button
-            className="text-yellow-500 focus:outline-none"
-            onClick={() => setIsMenuOpen(!isMenuOpen)}
-          >
+        {/* Mobile Hamburger */}
+        <button
+          aria-label="Toggle menu"
+          className="md:hidden text-yellow-500 focus:outline-none focus:ring-2 focus:ring-yellow-400 rounded"
+          onClick={() => setIsMenuOpen((prev) => !prev)}
+        >
+          {isMenuOpen ? (
+            // Close icon
             <svg
-              className="w-6 h-6"
-              fill="none"
-              stroke="currentColor"
-              viewBox="0 0 24 24"
               xmlns="http://www.w3.org/2000/svg"
+              className="h-8 w-8"
+              fill="none"
+              viewBox="0 0 24 24"
+              stroke="currentColor"
+              strokeWidth={2}
             >
-              <path
-                strokeLinecap="round"
-                strokeLinejoin="round"
-                strokeWidth="2"
-                d="M4 6h16M4 12h16M4 18h16"
-              ></path>
+              <path strokeLinecap="round" strokeLinejoin="round" d="M6 18L18 6M6 6l12 12" />
             </svg>
-          </button>
-        </div>
+          ) : (
+            // Hamburger icon
+            <svg
+              xmlns="http://www.w3.org/2000/svg"
+              className="h-8 w-8"
+              fill="none"
+              viewBox="0 0 24 24"
+              stroke="currentColor"
+              strokeWidth={2}
+            >
+              <path strokeLinecap="round" strokeLinejoin="round" d="M4 6h16M4 12h16M4 18h16" />
+            </svg>
+          )}
+        </button>
       </div>
 
       {/* Mobile Menu */}
       {isMenuOpen && (
-        <div className="md:hidden bg-white text-yellow-500 py-4">
-          <div className="space-y-4 text-center">
-            {["Home", "About", "Rooms", "Services", "Gallery", "Contact"].map(
-              (item) => (
+        <div className="md:hidden bg-white border-t border-gray-200">
+          <ul className="flex flex-col space-y-4 px-6 py-6">
+            {navItems.map(({ name, to }) => (
+              <li key={name}>
                 <Link
-                  to={`/${item.toLowerCase()}`}
-                  key={item}
-                  className="block text-yellow-500 hover:text-yellow-600 text-xl transition duration-300"
-                  onClick={() => setIsMenuOpen(false)} // Close the menu when an item is clicked
+                  to={to}
+                  onClick={() => setIsMenuOpen(false)}
+                  className="block text-yellow-500 hover:text-yellow-600 text-xl font-semibold transition duration-300"
                 >
-                  {item}
+                  {name}
                 </Link>
-              )
-            )}
-          </div>
+              </li>
+            ))}
+          </ul>
         </div>
       )}
     </nav>
