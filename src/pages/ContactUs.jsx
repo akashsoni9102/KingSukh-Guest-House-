@@ -18,7 +18,7 @@ const ContactUs = () => (
       whileInView={{ opacity: 1, y: 0 }}
       transition={{ duration: 0.7 }}
     >
-      {["Name", "Mobile No.", "Email", "Message"].map((label, i) => {
+      {["Name", "Mobile No.", "Email", "Message"].map((label) => {
         const id = label.toLowerCase().replace(/\s/g, "");
         const isTextarea = label === "Message";
 
@@ -32,7 +32,7 @@ const ContactUs = () => (
                 id={id}
                 rows="4"
                 placeholder={`Your ${label}`}
-                className="p-3 rounded-xl border border-gray-300 shadow-sm focus:outline-none focus:ring-2 focus:ring-yellow-500 transition"
+                className="w-full p-3 rounded-xl border border-gray-300 shadow-sm focus:outline-none focus:ring-2 focus:ring-yellow-500 transition"
                 required
               />
             ) : (
@@ -40,8 +40,15 @@ const ContactUs = () => (
                 id={id}
                 type={label === "Email" ? "email" : label === "Mobile No." ? "tel" : "text"}
                 placeholder={`Your ${label}`}
-                className="p-3 rounded-xl border border-gray-300 shadow-sm focus:outline-none focus:ring-2 focus:ring-yellow-500 transition"
+                className="w-full p-3 rounded-xl border border-gray-300 shadow-sm focus:outline-none focus:ring-2 focus:ring-yellow-500 transition"
                 required={label !== "Email"}
+                autoComplete={
+                  label === "Email"
+                    ? "email"
+                    : label === "Mobile No."
+                    ? "tel"
+                    : "name"
+                }
               />
             )}
           </div>

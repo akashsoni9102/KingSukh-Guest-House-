@@ -21,7 +21,7 @@ const Services = () => (
       Our Services
     </motion.h2>
 
-    <div className="flex flex-col-reverse md:flex-row items-center gap-12 max-w-6xl mx-auto">
+    <div className="flex flex-col md:flex-row items-center gap-12 max-w-6xl mx-auto">
       <motion.div
         className="w-full md:w-1/2 space-y-8"
         initial={{ x: -30, opacity: 0 }}
@@ -45,7 +45,7 @@ const Services = () => (
         <img
           src={serviceImage}
           alt="Services"
-          className="rounded-2xl shadow-xl w-4/5"
+          className="rounded-2xl shadow-xl w-full max-w-md object-cover"
         />
       </motion.div>
     </div>

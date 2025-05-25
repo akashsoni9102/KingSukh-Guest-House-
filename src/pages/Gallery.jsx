@@ -54,23 +54,26 @@ const Gallery = () => {
   };
 
   return (
-    <section id="gallery" className="py-16 px-4 sm:px-8 bg-white">
-      <h2 className="text-3xl sm:text-4xl font-bold mb-10 text-center text-gray-800">
-        Gallery
-      </h2>
+    <section id="gallery" className="py-16 px-6 bg-white max-w-7xl mx-auto">
+      <h2 className="text-4xl font-bold mb-12 text-center text-gray-800">Gallery</h2>
 
       {/* Responsive Grid */}
-      <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6 sm:gap-8">
+      <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-6">
         {galleryImages.map((image, index) => (
           <div
             key={image.id}
-            className="overflow-hidden rounded-xl shadow-md group cursor-pointer transform transition duration-300 hover:scale-105"
+            className="overflow-hidden rounded-xl shadow-lg cursor-pointer group transform transition duration-300 hover:scale-105"
             onClick={() => openModal(index)}
+            tabIndex={0}
+            onKeyDown={(e) => e.key === "Enter" && openModal(index)}
+            role="button"
+            aria-label={`View ${image.alt}`}
           >
             <img
               src={image.src}
               alt={image.alt}
-              className="w-full h-60 sm:h-64 md:h-72 object-cover transition-transform duration-300 group-hover:scale-110"
+              className="w-full h-48 sm:h-56 md:h-64 object-cover group-hover:scale-110 transition-transform duration-300"
+              loading="lazy"
             />
           </div>
         ))}
@@ -79,31 +82,33 @@ const Gallery = () => {
       {/* Modal */}
       {isModalOpen && (
         <div
-          className="fixed inset-0 bg-black bg-opacity-70 flex justify-center items-center z-50 p-4"
+          className="fixed inset-0 bg-gray-900 bg-opacity-80 flex justify-center items-center z-50 p-4"
           onClick={closeModal}
+          role="dialog"
+          aria-modal="true"
+          aria-label="Image modal"
         >
           <div
-            className="relative max-w-full max-h-full"
+            className="relative max-w-4xl max-h-[90vh] w-full rounded-xl overflow-hidden bg-black"
             onClick={(e) => e.stopPropagation()}
           >
             <img
               src={galleryImages[selectedImageIndex].src}
               alt={galleryImages[selectedImageIndex].alt}
-              className="w-auto max-w-[90vw] h-auto max-h-[85vh] rounded-xl object-contain"
+              className="w-full h-auto max-h-[85vh] object-contain"
             />
-
-            {/* Previous Button */}
+            {/* Navigation buttons */}
             <button
-              className="absolute top-1/2 left-4 transform -translate-y-1/2 text-white text-3xl bg-black bg-opacity-50 rounded-full p-2 hover:bg-opacity-70"
               onClick={prevImage}
+              className="absolute top-1/2 left-4 transform -translate-y-1/2 bg-black bg-opacity-50 text-white rounded-full p-2 text-3xl hover:bg-opacity-80 transition"
+              aria-label="Previous Image"
             >
               &#8592;
             </button>
-
-            {/* Next Button */}
             <button
-              className="absolute top-1/2 right-4 transform -translate-y-1/2 text-white text-3xl bg-black bg-opacity-50 rounded-full p-2 hover:bg-opacity-70"
               onClick={nextImage}
+              className="absolute top-1/2 right-4 transform -translate-y-1/2 bg-black bg-opacity-50 text-white rounded-full p-2 text-3xl hover:bg-opacity-80 transition"
+              aria-label="Next Image"
             >
               &#8594;
             </button>

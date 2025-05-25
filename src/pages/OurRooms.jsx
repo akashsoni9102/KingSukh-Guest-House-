@@ -1,6 +1,5 @@
 import React, { useState } from "react";
 
-// Image imports
 import DeluxeImg from "../assets/rooms/room1.jpg";
 import SuiteImg from "../assets/rooms/room2.jpg";
 import StandardImg from "../assets/rooms/room3.jpg";
@@ -55,33 +54,28 @@ const OurRooms = () => {
   };
 
   return (
-    <section id="rooms" className="px-4 sm:px-6 lg:px-8 py-12 bg-white">
-      <h2 className="text-3xl sm:text-4xl font-bold mb-10 text-center text-gray-800">
-        Our Rooms
-      </h2>
+    <section id="rooms" className="px-6 py-12 bg-white max-w-7xl mx-auto">
+      <h2 className="text-4xl font-bold mb-10 text-center text-gray-800">Our Rooms</h2>
 
-      <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
+      <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-8">
         {allRooms.slice(0, visibleCount).map((room) => (
           <div
             key={room.type}
-            className="bg-white border rounded-xl shadow-md overflow-hidden flex flex-col"
+            className="bg-white border border-gray-200 rounded-xl shadow-lg overflow-hidden flex flex-col"
           >
             <img
               src={room.image}
               alt={`${room.type} Room`}
-              className="w-full h-52 sm:h-56 md:h-64 object-cover"
+              className="w-full h-48 sm:h-56 md:h-64 object-cover"
+              loading="lazy"
             />
-            <div className="p-5 flex flex-col justify-between flex-grow">
-              <div>
-                <h3 className="text-xl sm:text-2xl font-bold text-gray-800 mb-2">
-                  {room.type} Room
-                </h3>
-                <p className="text-gray-600 text-sm sm:text-base mb-4">{room.detail}</p>
-                <p className="text-lg font-semibold text-gray-900 mb-4">{room.price}</p>
-              </div>
+            <div className="p-6 flex flex-col flex-grow">
+              <h3 className="text-2xl font-bold mb-2 text-gray-800">{room.type} Room</h3>
+              <p className="text-gray-600 mb-4 flex-grow">{room.detail}</p>
+              <p className="text-lg font-semibold text-gray-900 mb-4">{room.price}</p>
               <a
                 href="#contact"
-                className="inline-block bg-[#FFC6C6] text-[#222222] px-5 py-2 rounded-full font-semibold hover:brightness-90 transition duration-300"
+                className="inline-block bg-[#FFC6C6] text-[#222222] px-6 py-2 rounded-full font-semibold hover:brightness-90 transition duration-300 text-center"
               >
                 Book Now
               </a>
